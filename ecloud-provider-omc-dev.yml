@@ -1,0 +1,75 @@
+spring:
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+  jackson:
+    joda-date-time-format: yyyy-MM-dd HH:mm:ss
+    date-format: yyyy-MM-dd HH:mm:ss
+  datasource:
+    url: jdbc:mysql://ecloud-db-mysql:3306/ecloud_omc?useUnicode=true&characterEncoding=UTF-8
+
+liquibase:
+  change-log: classpath:liquibase/index.xml
+  user: ${spring.datasource.username}
+  password: ${spring.datasource.password}
+  url: ${spring.datasource.url}
+
+mybatis:
+  type-aliases-package: com.ecloud.provider.model.domain
+  mapper-locations: classpath:mapper/*.xml,classpath*:sdk/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+mapper:
+  mappers: com.ecloud.core.mybatis.MyMapper
+  not-empty: false
+  identity: MYSQL
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+security:
+  oauth2:
+    client:
+      clientId: ecloud-client-omc
+      clientSecret: ecloudClientSecret
+      access-token-uri: http://ecloud-gateway:7979/uac/oauth/token
+      user-authorization-uri: http://ecloud-gateway:7979/uac/oauth/authorize
+    resource:
+      user-info-uri: http://ecloud-gateway:7979/uac/user
+      prefer-token-info: false
+      jwt:
+        key-uri: http://ecloud-provider-uac:8000/oauth/token_key
+
+ecloud:
+  enableSqlLogInterceptor: false
+  aliyun:
+    rocketMq:
+      enable: false
+      reliableMessageConsumer: false
+      reliableMessageProducer: false
+      instanceName: ecloud-provider-omc
+      consumerGroup: CID_OMC
+      producerGroup: PID_OMC
+  token:
+    interceptor:
+      enable: true
+  zk:
+    zkAddressList: ecloud-provider-zk:2181
+  oauth2:
+    jwtSigningKey: ecloud
+    client:
+      id: ${security.oauth2.resource.id}
+      accessTokenUrl: ${security.oauth2.client.access-token-uri}
+      clientId: ${security.oauth2.client.clientId}
+      clientSecret: ${security.oauth2.client.clientSecret}
+      clientAuthenticationScheme: header
+      tokenStore: jwt
+  alipay:
+    callback:
+      url: http://api.ecloud.com/omc/pay/alipayCallback
+    qrCode:
+      pcPath: E:/File/alipay/QRCode
+      qiniuPath: alipay/QRCode/
