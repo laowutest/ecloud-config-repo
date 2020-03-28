@@ -105,6 +105,7 @@ info:
   关于我们: http://ecloud.net
 
 ecloud:
+  enableSqlLogInterceptor: false
   auth:
     jwt:
       expiredRemainMinutes: 20
