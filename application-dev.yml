@@ -15,11 +15,11 @@ spring:
   rabbitmq:
     host: ecloud-mq-rabbit
     port: 5672
-    username: guest
-    password: guest
+    username: qhy
+    password: ylm123$%^
   redis:
     host: ecloud-db-redis
-    password: ecloud@redis
+    password: 111111
     port: 6379
     timeout: 0
   datasource:
