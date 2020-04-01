@@ -15,6 +15,19 @@ zuul:
     connect-timeout-millis: 60000
   forceOriginalQueryStringEncoding: true
   routes:
+    management-route:
+      path: /management/**
+      sensitiveHeaders:
+#      strip-prefix: false
+      service-id: ecloud-management-api
+      ribbon:
+        eager-load:
+          enabled: true
+        MaxAutoRetries: 1
+        MaxAutoRetriesNextServer: 2
+        OkToRetryOnAllOperations: false
+        ConnectTimeout: 10000
+        ReadTimeout: 10000
     uac-route:
       path: /uac/**
       sensitiveHeaders:
