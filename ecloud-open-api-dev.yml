@@ -110,8 +110,6 @@ proxy:
       uac-route: oauth2
       mdc-route: oauth2
 
-ecloud:
-  enableSqlLogInterceptor: false
 # swagger butler配置
 swagger.butler:
   api-docs-path: v2/api-docs
@@ -121,3 +119,96 @@ swagger.butler:
   generate-routes: omc-route,mdc-route,opc-route,tpc-route,uac-route
 # 忽略某些路由生成
 #  ignore-routes:
+
+ecloud:
+  enableSqlLogInterceptor: false
+  aliyun:
+    rocketMq:
+      enable: true
+      reliableMessageConsumer: false
+      reliableMessageProducer: true
+      instanceName: ecloud-provider-uac
+      consumerGroup: CID_UAC
+      producerGroup: PID_UAC
+  auth:
+    rest-pwd-url: http://dev-login.ecloud.net/resetPwd?resetPwdKey=
+    active-user-url: http://dev-api.ecloud.net:7979/uac/auth/activeUser/
+    refresh-token-url: http://dev-api.ecloud.net:7979/uac/oauth/token
+  token:
+    interceptor:
+      enable: true
+  oauth2:
+    jwtSigningKey: ecloud
+    client:
+      id: ${security.oauth2.resource.id}
+      accessTokenUrl: ${security.oauth2.client.access-token-uri}
+      clientId: ${security.oauth2.client.clientId}
+      clientSecret: ${security.oauth2.client.clientSecret}
+      clientAuthenticationScheme: header
+  security:
+    social:
+      filterProcessesUrl: /auth/callback
+      qq:
+        app-id: 101431061
+        app-secret: 0154c848f45fc705412462d4f99a592c
+        providerId: qq
+      weixin:
+        app-id: wxd99431bbff8305a0
+        app-secret: 60f78681d063590a469f1b297feff3c4
+        providerId: weixin
+    code:
+      image:
+        expireIn: 180
+        url: /auth/register,/auth/submitResetPwdEmail,/auth/code/sms
+      sms:
+        expireIn: 600
+        url: /uac/auth/submitResetPwdPhone
+        mobileMaxSendCount: 1
+        ipMaxSendCount: 2
+        totalMaxSendCount: 3
+    oauth2:
+      tokenStore: jwt
+      clients[0]:
+        clientId: ecloud-client-uac
+        clientSecret: ecloudClientSecret
+        accessTokenValidateSeconds: 7200
+        scope: "*"
+      clients[1]:
+        clientId: ecloud-browser
+        clientSecret: ecloudClientSecret
+        accessTokenValidateSeconds: 7200
+        scope: "*"
+      clients[2]:
+        clientId: ecloud-client-gateway
+        clientSecret: ecloudClientSecret
+        accessTokenValidateSeconds: 7200
+        scope: "*"
+      clients[3]:
+        clientId: ecloud-client-zipkin
+        clientSecret: ecloudClientSecret
+        accessTokenValidateSeconds: 7200
+        scope: "*"
+      clients[4]:
+        clientId: ecloud-client-mdc
+        clientSecret: ecloudClientSecret
+        accessTokenValidateSeconds: 7200
+        scope: "*"
+      clients[5]:
+        clientId: ecloud-client-omc
+        clientSecret: ecloudClientSecret
+        accessTokenValidateSeconds: 7200
+        scope: "*"
+      clients[6]:
+        clientId: ecloud-client-opc
+        clientSecret: ecloudClientSecret
+        accessTokenValidateSeconds: 7200
+        scope: "*"
+      clients[7]:
+        clientId: ecloud-client-tpc
+        clientSecret: ecloudClientSecret
+        accessTokenValidateSeconds: 7200
+        scope: "*"
+
+feign:
+  hystrix:
+     enabled: false
