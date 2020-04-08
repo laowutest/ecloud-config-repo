@@ -138,6 +138,7 @@ ecloud:
       qiniuPath: alipay/QRCode/
   zk:
     zkAddressList: ecloud-provider-zk:2181
+    
 fastdfs:
  connect_timeout_in_seconds: 5
  network_timeout_in_seconds: 30
