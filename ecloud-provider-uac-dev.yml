@@ -6,6 +6,8 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
     url: jdbc:mysql://ecloud-db-mysql:3306/ypay_db_user?characterEncoding=utf8&useSSL=false
+    username: root
+    password: ryGHiJpdQ5?q
 
 mybatis:
   type-aliases-package: com.ecloud.provider.domain
