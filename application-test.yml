@@ -108,6 +108,7 @@ info:
   关于我们: http://ecloud.net
 
 ecloud:
+  visitUrl: http://119.29.7.59:8088/
   enableSqlLogInterceptor: false
   auth:
     jwt:
@@ -142,15 +143,11 @@ ecloud:
   zk:
     zkAddressList: ecloud-provider-zk:2181
 
-fastdfs:
- connect_timeout_in_seconds: 5
- network_timeout_in_seconds: 30
- thumbImage:
-   width: 150
-   height: 150
- charset: UTF-8
- tracker_servers: 119.29.7.59:22122 # 多个 trackerServer 中间以逗号分隔
- 
-#resHost:119.29.7.59
-#trackerPort: 22122
-#storagePort: 8088
+fdfs:
+  so-timeout: 1500 #读取超时时间
+  connect-timeout: 600 #连接超时时间
+  thumb-image: #缩略图大小
+    width: 100
+    height: 100
+  tracker-list: #跟踪服务器的ip和端口，端口默认为22122
+    - 119.29.7.59:22122
