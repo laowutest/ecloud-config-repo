@@ -108,6 +108,7 @@ info:
   关于我们: http://ecloud.net
 
 ecloud:
+  visitUrl: http://119.29.7.59:8088/
   enableSqlLogInterceptor: false
   auth:
     jwt:
