@@ -108,7 +108,7 @@ info:
   关于我们: http://ecloud.net
 
 ecloud:
-  visitUrl: http://119.29.7.59:8088/
+  visitUrl: http://61.141.221.203:8088/
   enableSqlLogInterceptor: false
   auth:
     jwt:
@@ -150,4 +150,4 @@ fdfs:
     width: 100
     height: 100
   tracker-list: #跟踪服务器的ip和端口，端口默认为22122
-    - 119.29.7.59:22122
+    - 61.141.221.203:22122
