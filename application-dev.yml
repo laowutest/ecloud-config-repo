@@ -19,7 +19,11 @@ spring:
     password: ylm123$%^
   data:
     mongodb:
-      uri: mongodb://ecloud-db-mongodb:27017/ypay_warehouse
+      host: ecloud-db-mongodb
+      port: 27017
+      username: ypay
+      password: Ypay123!@#
+      database: ypay_warehouse
   redis:
     host: ecloud-db-redis
     password: 111111
