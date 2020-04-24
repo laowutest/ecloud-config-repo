@@ -19,7 +19,6 @@ spring:
     password: Ypay456&*(
   data:
     mongodb:
-      #uri: mongodb://ypay:Ypay123!@#@ecloud-db-mongodb:27017/ypay_warehouse
       host: ecloud-db-mongodb
       port: 27017
       username: ypay
